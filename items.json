@@ -1,0 +1,58 @@
+{
+   "1": {
+      "name": "water",
+      "recipe": "0,0"
+   },
+   "10": {
+      "name": "gust",
+      "recipe": "9,9"
+   },
+   "11": {
+      "name": "tornado",
+      "recipe": "10,10"
+   },
+   "12": {
+      "name": "rain",
+      "recipe": "4,1"
+   },
+   "13": {
+      "name": "plant",
+      "recipe": "12,3"
+   },
+   "2": {
+      "name": "fire",
+      "recipe": "0,0"
+   },
+   "3": {
+      "name": "earth",
+      "recipe": "0,0"
+   },
+   "4": {
+      "name": "air",
+      "recipe": "0,0"
+   },
+   "5": {
+      "name": "mud",
+      "recipe": "1,3"
+   },
+   "6": {
+      "name": "silt",
+      "recipe": "5,3"
+   },
+   "7": {
+      "name": "land",
+      "recipe": "3,3"
+   },
+   "8": {
+      "name": "fire_tornado",
+      "recipe": "2,11"
+   },
+   "9": {
+      "name": "wind",
+      "recipe": "4,4"
+   },
+   "14": {
+      "recipe": "2,2",
+      "name": "forest_fire"
+   }
+}
