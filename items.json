@@ -54,5 +54,53 @@
    "14": {
       "recipe": "2,2",
       "name": "forest_fire"
+   },
+   "15": {
+      "recipe": "5,13",
+      "name": "swamp"
+   },
+   "16": {
+      "recipe": "4,2",
+      "name": "energy"
+   },
+   "17": {
+      "recipe": "16,15",
+      "name": "life"
+   },
+   "18": {
+      "recipe": "12,13",
+      "name": "time"
+   },
+   "19": {
+      "recipe": "18,17",
+      "name": "philosphy"
+   },
+   "20": {
+      "recipe": "17,15",
+      "name": "goblin"
+   },
+   "21": {
+      "recipe": "7,7",
+      "name": "mountain"
+   },
+   "22": {
+      "recipe": "21,4",
+      "name": "cave"
+   },
+   "23": {
+      "recipe": "22,20",
+      "name": "mine"
+   },
+   "24": {
+      "recipe": "23,18",
+      "name": "gold"
+   },
+   "25": {
+      "recipe": "18,24",
+      "name": "human"
+   },
+   "26": {
+      "recipe": "25,24",
+      "name": "royalty"
    }
 }

@@ -1,5 +1,7 @@
+import os
 import json
 import login
+
 from os import system, name
 
 filename = 'items.json'
@@ -19,6 +21,12 @@ def read():
 
 
 def write():
+	pa = input('Password?\n')
+	my_secret = os.environ['pass']
+	if pa != my_secret:
+		clear()
+		print('WRONG\n')
+		start()
 	data = read()
 	h = login.read('data.json')
 	id = input('id?\n')
@@ -38,35 +46,58 @@ def write():
 	f.write(temp + '\n')
 	f.close()
 
+def clearquest():
+	temp = input('Do you want to clear your progress?\n')
+	if temp == 'y':
+		print('clearing!')
+		for i in range(1,len(login.data)+1):
+			login.data[str(i)] = 0
+		login.data['1'] = 1
+		login.data['2'] = 1
+		login.data['3'] = 1
+		login.data['4'] = 1
+		login.update(user,pas)
+	else:
+		clear()
+		print('stopping!')
+		main()
 
 def main():
 	temp = read()
 	data = login.data
 	for i in range(1, len(data) + 1):
-		if data[str(i)] == 1:
-			print(temp[str(i)]['name'], '		', i)
-	rep = input('Recipe 1/2\n')
+		if data[str(i)] == 1 or login.dev == 1:
+			print( '{}			{}'.format(temp[str(i)]['name'],i))
+	rep = input('Recipe 1,2\n')
+	if rep == 'reset':
+		clear()
+		clearquest()
 	if len(rep) < 3:
 		clear()
 		print('Invalid recipe!\n')
-	for i in range(1, len(data) + 1):
-		print(temp[str(i)])
-		tt = temp[str(i)]['recipe']
-		tedata = str(tt)
-		if rep == tedata:
-			data[str(i)] = 1
-			login.update(user, pas)
-			clear()
-			print(temp[str(i)]['name'] + ' unlocked\n')
-			main()
+	tempk = rep.split(',')
+	if data[str(tempk[0])] == 1 and data[str(tempk[1])] == 1: 
+		for i in range(1, len(data) + 1):
+			tt = temp[str(i)]['recipe']
+			tedata = str(tt)
+			if rep == tedata:
+				data[str(i)] = 1
+				login.update(user, pas)
+				clear()
+				print(temp[str(i)]['name'] + ' unlocked\n')
+				main()
 	clear()
-	print('not recipe\n')
+	print('Invalid recipe!\n')
 	main()
 
 
 def start():
 	login.data = login.read('data.json')
 	temp = input('[1] Login [2] Sign up\n')
+	if temp == 'admin':
+		clear()
+		print('adding console')
+		write()
 	clear()
 	if temp == '1':
 		global user
@@ -83,6 +114,4 @@ def start():
 		clear()
 		start()
 
-
 start()
-#write()

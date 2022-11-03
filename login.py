@@ -7,7 +7,6 @@ data = {
 }
 
 def check(num):
-	print(num)
 	if num % 2 ==0:
 		return True
 	else:
@@ -60,6 +59,8 @@ def login(user,password):
 	temp = temp[str(id)]
 	if temp['username'] == user and temp['password'] == password:
 		global data 
+		global dev
+		dev = int(temp['data']['dev'])
 		data = temp['data']['items']
 		temp['logincount'] = int(temp['logincount']) + 1
 		temp['data']['last_login'] = rn
