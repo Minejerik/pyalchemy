@@ -2,22 +2,25 @@ import json
 from datetime import date
 import time
 
-data = {
+VERSION = '1.2.1'
 
-}
+data = {}
+
 
 def check(num):
-	if num % 2 ==0:
+	if num % 2 == 0:
 		return True
 	else:
 		return False
+
 
 def read(file):
 	with open(file) as json_file:
 		data = json.load(json_file)
 	return data
 
-def a(id,towrite):
+
+def a(id, towrite):
 	id = str(id)
 	temp = read('user.json')
 	temp[id] = towrite
@@ -26,58 +29,72 @@ def a(id,towrite):
 	f.write(temp + '\n')
 	f.close()
 
-def signup(user,password):
+
+def signup(user, password):
 	today = str(date.today())
 	rn = str(int(time.time()))
-	id = len(user)+len(password)
+	id = len(user) + len(password)
 	if check(id):
 		id = id + 15
 	else:
-		id = id-15
+		id = id - 15
 	temp = {
-	'username':user,
-	'password':password,
-	'key':'PLACEHOLDER_KEY',
-	'id':id,
-	'logincount':0,
-	'data':{'creation_date':today,'creation_time':rn,'last_login':today,'items':data,'dev':0}
+	 'username': user,
+	 'password': password,
+	 'key': 'PLACEHOLDER_KEY',
+	 'id': id,
+	 'logincount': 0,
+	 'version': VERSION,
+	 'data': {
+	  'creation_date': today,
+	  'creation_time': rn,
+	  'last_login': today,
+	  'items': data,
+	  'dev': 0
+	 }
 	}
 	if user == 'Minejerik':
 		temp['data']['dev'] = 1
-	a(id,temp)
-	return('success')
+	a(id, temp)
+	return ('success')
 
-def login(user,password):
+
+def login(user, password):
 	rn = str(int(time.time()))
 	user = str(user)
-	id = int(len(user))+int(len(password))
+	id = int(len(user)) + int(len(password))
 	if check(id):
 		id = id + 15
 	else:
-		id = id-15
+		id = id - 15
 	temp = read('user.json')
 	temp = temp[str(id)]
 	if temp['username'] == user and temp['password'] == password:
-		global data 
+		global data
 		global dev
 		dev = int(temp['data']['dev'])
 		data = temp['data']['items']
 		temp['logincount'] = int(temp['logincount']) + 1
 		temp['data']['last_login'] = rn
-		a(id,temp)
+		if str(temp['version']) != str(VERSION):
+			print('ACCOUNT MADE IN ' + str(temp['version']) +
+			      " NOT COMPATIBLE WITH VERSION " + VERSION+ ' MAKE A NEW ACCOUNT!')
+			exit()
+		a(id, temp)
 		return True
-	elif temp['username']==user and temp['password'] != password:
+	elif temp['username'] == user and temp['password'] != password:
 		return False
 	else:
 		return False
 
-def update(user,password):
-	id = len(user)+len(password)
+
+def update(user, password):
+	id = len(user) + len(password)
 	if check(id):
 		id = id + 15
 	else:
-		id = id-15
+		id = id - 15
 	temp = read('user.json')
 	temp = temp[str(id)]
 	temp['data']['items'] = data
-	a(id,temp)
+	a(id, temp)
