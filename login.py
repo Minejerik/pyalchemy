@@ -2,7 +2,7 @@ import json
 from datetime import date
 import time
 
-VERSION = '1.2.1'
+
 
 data = {}
 
@@ -31,6 +31,7 @@ def a(id, towrite):
 
 
 def signup(user, password):
+	VERSION = '1.'+str(len(read('data.json')))
 	today = str(date.today())
 	rn = str(int(time.time()))
 	id = len(user) + len(password)
@@ -60,6 +61,7 @@ def signup(user, password):
 
 
 def login(user, password):
+	VERSION = '1.'+str(len(read('data.json')))
 	rn = str(int(time.time()))
 	user = str(user)
 	id = int(len(user)) + int(len(password))

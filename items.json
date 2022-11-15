@@ -118,5 +118,53 @@
    "30": {
       "recipe": "29,29",
       "name": "World War II"
+   },
+   "0": {
+      "recipe": "null",
+      "name": "TEMP_ITEM_TEST"
+   },
+   "31": {
+      "recipe": "13,18",
+      "name": "tree"
+   },
+   "32": {
+      "recipe": "4,19",
+      "name": "small"
+   },
+   "33": {
+      "recipe": "3,2",
+      "name": "lava"
+   },
+   "34": {
+      "recipe": "33,4",
+      "name": "stone"
+   },
+   "35": {
+      "recipe": "34,34",
+      "name": "wall"
+   },
+   "36": {
+      "recipe": "35,35",
+      "name": "house"
+   },
+   "37": {
+      "recipe": "36,19",
+      "name": "container"
+   },
+   "38": {
+      "recipe": "4,3",
+      "name": "dust"
+   },
+   "39": {
+      "recipe": "38,2",
+      "name": "gunpowder"
+   },
+   "40": {
+      "recipe": "39,37",
+      "name": "bullet"
+   },
+   "41": {
+      "recipe": "40,37",
+      "name": "gun"
    }
 }

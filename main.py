@@ -65,7 +65,7 @@ def clearquest():
 def main():
 	temp = read()
 	data = login.data
-	for i in range(1, len(data) + 1):
+	for i in range(0, len(data)):
 		if data[str(i)] == 1 or login.dev == 1:
 			print( '{}			{}'.format(temp[str(i)]['name'],i))
 	rep = input('Recipe 1,2\n')
@@ -77,7 +77,7 @@ def main():
 		print('Invalid recipe!\n')
 	tempk = rep.split(',')
 	if data[str(tempk[0])] == 1 and data[str(tempk[1])] == 1: 
-		for i in range(1, len(data) + 1):
+		for i in range(0, len(data)):
 			tt = temp[str(i)]['recipe']
 			tedata = str(tt)
 			if rep == tedata:
