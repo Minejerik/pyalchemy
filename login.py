@@ -25,8 +25,20 @@ def a(id, towrite):
 	temp = read('user.json')
 	temp[id] = towrite
 	f = open('user.json', 'w')
-	temp = json.dumps(temp, indent=3, sort_keys=True)
+	temp = json.dumps(temp)
 	f.write(temp + '\n')
+	f.close()
+
+def b(id, towrite):
+	VERSION = '1.'+str(len(read('data.json')))
+	id = str(id)
+	temp = read('user.json')
+	#temp[id]['data']['items'] = towrite
+	temp[id]['data']['version'] = VERSION
+	f = open('user.json', 'w')
+	temp = json.dumps(temp)
+	f.write(temp + '\n')
+	print(temp)
 	f.close()
 
 
@@ -59,6 +71,15 @@ def signup(user, password):
 	a(id, temp)
 	return ('success')
 
+def migrate(id):
+	id = str(id)
+	user = read('user.json')
+	items = {}
+	items = read('data.json')
+	for i in range(0, len(user[id]['data']['items'])):
+		i = str(i)
+		items[i] = user[id]['data']['items'][i]
+	b(id,items)
 
 def login(user, password):
 	VERSION = '1.'+str(len(read('data.json')))
@@ -72,16 +93,19 @@ def login(user, password):
 	temp = read('user.json')
 	temp = temp[str(id)]
 	if temp['username'] == user and temp['password'] == password:
+		if str(temp['version']) != str(VERSION):
+			print('Account made in old version create new account')
+			exit()
+			#if input() == 'y':
+			#	migrate(id)
+			#else:
+			#	exit()
 		global data
 		global dev
 		dev = int(temp['data']['dev'])
 		data = temp['data']['items']
 		temp['logincount'] = int(temp['logincount']) + 1
 		temp['data']['last_login'] = rn
-		if str(temp['version']) != str(VERSION):
-			print('ACCOUNT MADE IN ' + str(temp['version']) +
-			      " NOT COMPATIBLE WITH VERSION " + VERSION+ ' MAKE A NEW ACCOUNT!')
-			exit()
 		a(id, temp)
 		return True
 	elif temp['username'] == user and temp['password'] != password:

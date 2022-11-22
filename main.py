@@ -14,6 +14,15 @@ def clear():
 		_ = system('clear')
 
 
+def fliprep(str):
+	tst = str.split(',')
+	str = ''
+	str = str + tst[1]
+	str = str + ','
+	str = str + tst[0]
+	return str
+
+
 def read():
 	with open(filename) as json_file:
 		data = json.load(json_file)
@@ -46,28 +55,35 @@ def write():
 	f.write(temp + '\n')
 	f.close()
 
+
 def clearquest():
 	temp = input('Do you want to clear your progress?\n')
 	if temp == 'y':
 		print('clearing!')
-		for i in range(1,len(login.data)+1):
+		for i in range(1, len(login.data) + 1):
 			login.data[str(i)] = 0
 		login.data['1'] = 1
 		login.data['2'] = 1
 		login.data['3'] = 1
 		login.data['4'] = 1
-		login.update(user,pas)
+		if login.dev == 1:
+			login.data['0'] = 1
+		login.update(user, pas)
 	else:
 		clear()
 		print('stopping!')
 		main()
+
 
 def main():
 	temp = read()
 	data = login.data
 	for i in range(0, len(data)):
 		if data[str(i)] == 1 or login.dev == 1:
-			print( '{}			{}'.format(temp[str(i)]['name'],i))
+			print('{}			{}'.format(temp[str(i)]['name'], i))
+		if login.dev == 1:
+			data[str(i)] =1
+			login.update(user,pas)
 	rep = input('Recipe 1,2\n')
 	if rep == 'reset':
 		clear()
@@ -75,12 +91,14 @@ def main():
 	if len(rep) < 3:
 		clear()
 		print('Invalid recipe!\n')
+		main()
 	tempk = rep.split(',')
-	if data[str(tempk[0])] == 1 and data[str(tempk[1])] == 1: 
+	if data[str(tempk[0])] == 1 and data[str(tempk[1])] == 1:
+		fl = fliprep(rep)
 		for i in range(0, len(data)):
 			tt = temp[str(i)]['recipe']
 			tedata = str(tt)
-			if rep == tedata:
+			if rep == tedata or fl == tedata:
 				data[str(i)] = 1
 				login.update(user, pas)
 				clear()
@@ -113,5 +131,6 @@ def start():
 		login.signup(input('Username?\n'), input('Password?\n'))
 		clear()
 		start()
+
 
 start()

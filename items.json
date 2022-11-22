@@ -166,5 +166,21 @@
    "41": {
       "recipe": "40,37",
       "name": "gun"
+   },
+   "42": {
+      "recipe": "41,25",
+      "name": "corpse"
+   },
+   "43": {
+      "recipe": "42,3",
+      "name": "grave"
+   },
+   "44": {
+      "recipe": "43,25",
+      "name": "sad"
+   },
+   "45": {
+      "recipe": "19,27",
+      "name": "big"
    }
 }
