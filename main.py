@@ -82,8 +82,8 @@ def main():
 		if data[str(i)] == 1 or login.dev == 1:
 			print('{}			{}'.format(temp[str(i)]['name'], i))
 		if login.dev == 1:
-			data[str(i)] =1
-			login.update(user,pas)
+			data[str(i)] = 1
+			login.update(user, pas)
 	rep = input('Recipe 1,2\n')
 	if rep == 'reset':
 		clear()

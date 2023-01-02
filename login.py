@@ -1,8 +1,7 @@
 import json
 from datetime import date
+from replit import db
 import time
-
-
 
 data = {}
 
@@ -22,28 +21,17 @@ def read(file):
 
 def a(id, towrite):
 	id = str(id)
-	temp = read('user.json')
-	temp[id] = towrite
-	f = open('user.json', 'w')
-	temp = json.dumps(temp)
-	f.write(temp + '\n')
-	f.close()
+	db[id] = towrite
+
 
 def b(id, towrite):
-	VERSION = '1.'+str(len(read('data.json')))
+	VERSION = '1.' + str(len(read('data.json')))
 	id = str(id)
-	temp = read('user.json')
-	#temp[id]['data']['items'] = towrite
-	temp[id]['data']['version'] = VERSION
-	f = open('user.json', 'w')
-	temp = json.dumps(temp)
-	f.write(temp + '\n')
-	print(temp)
-	f.close()
+	db[id]['data']['version'] = VERSION
 
 
 def signup(user, password):
-	VERSION = '1.'+str(len(read('data.json')))
+	VERSION = '1.' + str(len(read('data.json')))
 	today = str(date.today())
 	rn = str(int(time.time()))
 	id = len(user) + len(password)
@@ -71,6 +59,7 @@ def signup(user, password):
 	a(id, temp)
 	return ('success')
 
+
 def migrate(id):
 	id = str(id)
 	user = read('user.json')
@@ -79,10 +68,11 @@ def migrate(id):
 	for i in range(0, len(user[id]['data']['items'])):
 		i = str(i)
 		items[i] = user[id]['data']['items'][i]
-	b(id,items)
+	b(id, items)
+
 
 def login(user, password):
-	VERSION = '1.'+str(len(read('data.json')))
+	VERSION = '1.' + str(len(read('data.json')))
 	rn = str(int(time.time()))
 	user = str(user)
 	id = int(len(user)) + int(len(password))
@@ -90,16 +80,12 @@ def login(user, password):
 		id = id + 15
 	else:
 		id = id - 15
-	temp = read('user.json')
-	temp = temp[str(id)]
+	id = str(id)
+	temp = db[id]
 	if temp['username'] == user and temp['password'] == password:
 		if str(temp['version']) != str(VERSION):
 			print('Account made in old version create new account')
 			exit()
-			#if input() == 'y':
-			#	migrate(id)
-			#else:
-			#	exit()
 		global data
 		global dev
 		dev = int(temp['data']['dev'])
@@ -120,7 +106,6 @@ def update(user, password):
 		id = id + 15
 	else:
 		id = id - 15
-	temp = read('user.json')
-	temp = temp[str(id)]
+	temp = db[str(id)]
 	temp['data']['items'] = data
 	a(id, temp)

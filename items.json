@@ -182,5 +182,9 @@
    "45": {
       "recipe": "19,27",
       "name": "big"
+   },
+   "46": {
+      "recipe": "44,45",
+      "name": "depression"
    }
 }
